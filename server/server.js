@@ -13,14 +13,17 @@ app.use( express.static(publicPath))
 
 io.on('connection',(socket)=>{
     console.log('New user connected');
+
+    socket.emit('newMessage',{'from':'admin','text':'Welcome to the chat app'});
+    socket.broadcast.emit('newMessage',{'from':'admin', 'text':'New User joined'});
+
     socket.on('disconnect',()=>{
         console.log('User disconnected');
     })
     socket.on('createMessage',(data)=>{
         console.log('createMessage',data);
-        //socket.emit('newMessage',{'from':data.from,'receivedTime':new Date().getTime().toString()});
-        io.emit('newMessage',{'from':data.from,'receivedTime':new Date().getTime().toString()});
-    })
+        io.emit('newMessage',{'from':data.from, 'text':data.text, 'receivedTime':new Date().getTime().toString()});
+        })
     
 });
 server.listen(port,()=>{
