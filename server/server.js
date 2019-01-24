@@ -18,8 +18,10 @@ io.on('connection',(socket)=>{
     })
     socket.on('createMessage',(data)=>{
         console.log('createMessage',data);
+        //socket.emit('messageReceived',{'from':data.from,'receivedTime':new Date().getTime().toString()});
+        io.emit('messageReceived',{'to':data.to,'receivedTime':new Date().getTime().toString()});
     })
-    socket.emit('newMessage',{'from':'mahesh.kadam','text':'how are you','createdAt':new Date()});
+    
 });
 server.listen(port,()=>{
     console.log(`server listening on port ${port}`)
