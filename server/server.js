@@ -18,8 +18,8 @@ io.on('connection',(socket)=>{
     })
     socket.on('createMessage',(data)=>{
         console.log('createMessage',data);
-        //socket.emit('newMessage',{'to':data.to,'receivedTime':new Date().getTime().toString()});
-        io.emit('newMessage',{'to':data.to,'receivedTime':new Date().getTime().toString()});
+        //socket.emit('newMessage',{'from':data.from,'receivedTime':new Date().getTime().toString()});
+        io.emit('newMessage',{'from':data.from,'receivedTime':new Date().getTime().toString()});
     })
     
 });
