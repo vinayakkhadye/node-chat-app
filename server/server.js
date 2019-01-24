@@ -20,8 +20,9 @@ io.on('connection',(socket)=>{
     socket.on('disconnect',()=>{
         console.log('User disconnected');
     })
-    socket.on('createMessage',(data)=>{
+    socket.on('createMessage',(data, callback)=>{
         io.emit('newMessage',geneateMessage(data.from,data.text));
+        callback('Message Emitted to every one');
     })
     
 });
