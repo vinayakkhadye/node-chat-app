@@ -9,10 +9,6 @@ socket.on('disconnect',function () {
 });
 
 socket.on('newMessage',function (data) {
-    console.log('newMessage',data);
+    console.log(`New Message Notification : message by  ${data.from} received at ${data.receivedTime}`);
 })
 
-socket.on('messageReceived',function (data) {
-    console.log(data);
-    console.log(`Message received by ${data.to} at ${data.receivedTime}`);
-})
