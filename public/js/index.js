@@ -13,8 +13,11 @@ jQuery('#form-message').on('submit',function(e) {
     e.preventDefault()
     socket.emit('createMessage',{
         'from':jQuery('[name=username]').val(),
-        'text':jQuery('[name=message]').val()},
+        'text':jQuery('[name=message]').val()
+    },
         (callbackData)=>{
-        console.log(callbackData);
+            console.log('clear text');
+        jQuery('[name=message]').val('');
+        jQuery('[name=message]').focus();
     });
 });
