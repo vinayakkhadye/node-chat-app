@@ -3,7 +3,7 @@ const socketIO  = require('socket.io');
 const http      = require('http');
 const express   = require('express');
 const publicPath= path.join(__dirname,'../public');
-const {geneateMessage} = require('./utils/mssage');
+const {geneateMessage, geneateLocationMessage} = require('./utils/mssage');
 var app     = express();
 var server  = http.createServer(app);
 var io      = socketIO(server);
@@ -24,7 +24,10 @@ io.on('connection',(socket)=>{
         io.emit('newMessage',geneateMessage(data.from,data.text));
         callback('clear');
     })
-    
+    socket.on('sendLocationMessage',(position,callback)=>{
+        io.emit('newLocationMessage',geneateLocationMessage('Admin', position.latitude, position.longitude));
+        callback();
+    })
 });
 server.listen(port,()=>{
     console.log(`server listening on port ${port}`)
